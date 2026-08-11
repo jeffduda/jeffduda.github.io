@@ -6,22 +6,17 @@
 <title>Jeffrey T. Duda</title>
 <style>
   :root {
-    --bg: #ffffff;
+    --sidebar-bg: #011F5B;      /* Penn Blue */
+    --sidebar-text: #ffffff;
+    --sidebar-muted: #b9c6dd;
+    --accent: #990000;          /* Penn Red */
+    --bg: #f5f6f8;
+    --card-bg: #ffffff;
     --text: #1a1a1a;
     --muted: #5a5a5a;
-    --accent: #2a5d8a;
-    --border: #e2e2e2;
-    --card-bg: #f7f8fa;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #14161a;
-      --text: #eaeaea;
-      --muted: #a3a3a3;
-      --accent: #7cb0e0;
-      --border: #2b2e33;
-      --card-bg: #1c1f24;
-    }
+    --border: #e4e6ea;
+    --pill-bg: #eef2f8;
+    --pill-text: #011F5B;
   }
   * { box-sizing: border-box; }
   body {
@@ -31,195 +26,262 @@
     color: var(--text);
     line-height: 1.6;
   }
-  .wrap {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 5rem;
+  .layout {
+    display: flex;
+    min-height: 100vh;
   }
-  header {
-    margin-bottom: 2.5rem;
+  .sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 2.5rem 1.75rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
   }
-  h1 {
-    font-size: 2rem;
-    margin: 0 0 0.25rem;
+  .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 3px solid rgba(255,255,255,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin: 0 auto 1.2rem;
   }
-  .tagline {
-    color: var(--muted);
-    font-size: 1.05rem;
-    margin: 0 0 1rem;
+  .sidebar h1 {
+    font-size: 1.35rem;
+    text-align: center;
+    margin: 0 0 0.2rem;
   }
-  .contact {
-    font-size: 0.9rem;
-    color: var(--muted);
+  .sidebar .role {
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--sidebar-muted);
+    margin: 0 0 1.5rem;
   }
-  .contact a {
-    color: var(--accent);
-    text-decoration: none;
+  .sidebar-section {
+    margin-bottom: 1.6rem;
   }
-  .contact a:hover { text-decoration: underline; }
-  section {
-    margin-bottom: 2.5rem;
-  }
-  h2 {
-    font-size: 1.15rem;
+  .sidebar-section h3 {
+    font-size: 0.72rem;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.08em;
+    color: var(--sidebar-muted);
+    margin: 0 0 0.6rem;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
     padding-bottom: 0.4rem;
-    margin-bottom: 1.2rem;
   }
-  .entry {
-    margin-bottom: 1.4rem;
-  }
-  .entry:last-child { margin-bottom: 0; }
-  .entry-title {
-    font-weight: 600;
-    font-size: 1rem;
-  }
-  .entry-sub {
-    color: var(--muted);
-    font-size: 0.9rem;
-    margin-bottom: 0.4rem;
-  }
-  .entry ul {
-    margin: 0.4rem 0 0;
-    padding-left: 1.2rem;
-  }
-  .entry li {
-    margin-bottom: 0.3rem;
-    font-size: 0.95rem;
-  }
-  .pub-list {
+  .contact-list {
     list-style: none;
     margin: 0;
     padding: 0;
+    font-size: 0.85rem;
   }
-  .pub-list li {
-    padding: 0.6rem 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.92rem;
+  .contact-list li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
   }
-  .pub-list li:last-child { border-bottom: none; }
-  .pub-venue {
-    color: var(--muted);
-    font-style: italic;
+  .contact-list a {
+    color: var(--sidebar-text);
+    text-decoration: none;
+    word-break: break-word;
   }
-  .note {
+  .contact-list a:hover { text-decoration: underline; }
+  .icon {
+    width: 16px;
+    text-align: center;
+    opacity: 0.85;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .tag {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: var(--sidebar-text);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+  }
+  .edu-mini {
+    font-size: 0.82rem;
+    margin-bottom: 0.9rem;
+  }
+  .edu-mini:last-child { margin-bottom: 0; }
+  .edu-mini .deg { font-weight: 600; }
+  .edu-mini .school { color: var(--sidebar-muted); }
+  .edu-mini .year { color: var(--sidebar-muted); font-size: 0.78rem; }
+
+  .main {
+    flex: 1;
+    padding: 2.75rem 3rem 5rem;
+    max-width: 820px;
+  }
+  .card {
     background: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.9rem 1.1rem;
-    font-size: 0.9rem;
-    color: var(--muted);
+    border-radius: 10px;
+    padding: 1.6rem 1.8rem;
+    margin-bottom: 1.6rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
   }
-  footer {
-    color: var(--muted);
+  .card h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.05rem;
+    color: var(--accent);
+    margin: 0 0 1.1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--accent);
+  }
+  .entry { margin-bottom: 1.3rem; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry-title { font-weight: 600; font-size: 0.98rem; }
+  .entry-sub { color: var(--muted); font-size: 0.87rem; margin-bottom: 0.35rem; }
+  .entry ul { margin: 0.35rem 0 0; padding-left: 1.2rem; }
+  .entry li { margin-bottom: 0.28rem; font-size: 0.92rem; }
+  .pub-list { list-style: none; margin: 0; padding: 0; }
+  .pub-list li {
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .pub-list li:last-child { border-bottom: none; }
+  .pub-venue { color: var(--muted); font-style: italic; }
+  .note {
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
     font-size: 0.85rem;
-    text-align: center;
-    margin-top: 3rem;
+    margin-top: 0.8rem;
+  }
+  .badge-label {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
   }
 </style>
 </head>
 <body>
-<div class="wrap">
-
-  <header>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="avatar">JD</div>
     <h1>Jeffrey T. Duda, Ph.D.</h1>
-    <p class="tagline">Research Scientist, Department of Radiology &mdash; University of Pennsylvania</p>
-    <p class="contact">
-      Philadelphia, PA &nbsp;&middot;&nbsp;
-      <a href="mailto:jeffrey.duda@pennmedicine.upenn.edu">jeffrey.duda@pennmedicine.upenn.edu</a>
-    </p>
-  </header>
+    <p class="role">Research Scientist<br>Dept. of Radiology, Penn Medicine</p>
 
-  <section id="bio">
-    <h2>Bio</h2>
-    <p>
-      I'm a Research Scientist in the Department of Radiology at the University of Pennsylvania, where I
-      develop medical image analysis software and AI-based tools that move from research prototypes into
-      real-world clinical use. I hold a Ph.D. in Bioengineering from the University of Pennsylvania and
-      a B.S. in Biomedical Engineering from Case Western Reserve University. My work spans neuroimaging,
-      traumatic brain injury, and cloud-based deep learning platforms for analyzing abdominal CT and other
-      medical images, with contributions to widely used open-source toolkits including ITK and ANTs (Advanced
-      Normalization Tools). I'm an author on more than 100 peer-reviewed publications.
-    </p>
-  </section>
-
-  <section id="education">
-    <h2>Education</h2>
-    <div class="entry">
-      <div class="entry-title">Ph.D. in Bioengineering &mdash; University of Pennsylvania</div>
-      <div class="entry-sub">Philadelphia, PA &middot; 2010</div>
-      <ul>
-        <li>Dissertation: <em>Characterizing Connectivity in Brain Networks Using Magnetic Resonance Imaging</em></li>
-        <li>Contributed to the Insight Segmentation and Registration Toolkit (ITK), an open-source C++ system run by the National Library of Medicine</li>
-        <li>Whitaker Graduate Fellowship &mdash; full tuition &amp; stipend, 38 awardees nationwide per year</li>
+    <div class="sidebar-section">
+      <h3>Contact</h3>
+      <ul class="contact-list">
+        <li><span class="icon">&#9993;</span><a href="mailto:jeffrey.duda@pennmedicine.upenn.edu">jeffrey.duda@pennmedicine.upenn.edu</a></li>
+        <li><span class="icon">&#128205;</span>Philadelphia, PA</li>
       </ul>
     </div>
-    <div class="entry">
-      <div class="entry-title">B.S. in Biomedical Engineering &mdash; Case Western Reserve University</div>
-      <div class="entry-sub">Cleveland, OH &middot; 2000 &middot; summa cum laude, GPA 3.80/4.00</div>
-      <ul>
-        <li>Biomedical Computing and Imaging Sequence; Minor in Studio Art</li>
-        <li>Undergraduate Biomedical Engineering Research Award (1 awardee per year)</li>
-      </ul>
-    </div>
-  </section>
 
-  <section id="experience">
-    <h2>Experience</h2>
-    <div class="entry">
-      <div class="entry-title">Research Scientist, Department of Radiology &mdash; University of Pennsylvania</div>
-      <div class="entry-sub">Philadelphia, PA &middot; Present</div>
-      <ul>
-        <li>Developing the AInSights platform for cloud-based AI analysis of medical images in real-world clinical environments, including a deep learning system for organ/tissue identification in abdominal CT reported back to EHR systems (patent application US-2024-0145068-A1)</li>
-        <li>Investigating spatiotemporal profiles of atrophy following traumatic brain injury (TBI)</li>
-        <li>Building automated systems to extract and summarize quantitative measures from a large multi-center MR dataset for neurodegenerative disease research</li>
-        <li>Creating web resources for sharing protocols, tools, and SOPs in accordance with FAIR data management principles</li>
-      </ul>
+    <div class="sidebar-section">
+      <h3>Interests</h3>
+      <div class="tags">
+        <span class="tag">Medical Imaging</span>
+        <span class="tag">Neuroimaging</span>
+        <span class="tag">Deep Learning</span>
+        <span class="tag">Open-Source Software</span>
+      </div>
     </div>
-    <div class="entry">
-      <div class="entry-title">Postdoctoral Researcher, Department of Radiology &mdash; University of Pennsylvania</div>
-      <div class="entry-sub">Philadelphia, PA &middot; 2010&ndash;2015</div>
-      <ul>
-        <li>Developed methods for multi-modal medical image analysis of pediatric brain data</li>
-        <li>Refactored and redesigned the image registration framework for ITKv4</li>
-        <li>Developed algorithms for large-scale neural network connectivity analysis, contributed to Advanced Normalization Tools (ANTs)</li>
-        <li>Active developer of Pipedream, an open-source pipeline for automated multi-modality neuroimaging analysis</li>
-      </ul>
+
+    <div class="sidebar-section">
+      <h3>Education</h3>
+      <div class="edu-mini">
+        <div class="deg">Ph.D., Bioengineering</div>
+        <div class="school">Univ. of Pennsylvania</div>
+        <div class="year">2010</div>
+      </div>
+      <div class="edu-mini">
+        <div class="deg">B.S., Biomedical Engineering</div>
+        <div class="school">Case Western Reserve Univ.</div>
+        <div class="year">2000</div>
+      </div>
     </div>
-    <div class="entry">
-      <div class="entry-title">Research / Co-op Engineer, Whitaker Biomedical Imaging Laboratory &mdash; Cleveland Clinic Foundation</div>
-      <div class="entry-sub">Cleveland, OH &middot; 1997&ndash;2000</div>
-      <ul>
-        <li>Developed custom research software for radiologists and medical physicists</li>
-        <li>Managed multi-site MRI data collection and standardization for a multi-center drug study</li>
+  </aside>
+
+  <main class="main">
+    <section class="card">
+      <span class="badge-label">Bio</span>
+      <p>
+        I'm a Research Scientist in the Department of Radiology at the University of Pennsylvania, where I
+        develop medical image analysis software and AI-based tools that move from research prototypes into
+        real-world clinical use. I hold a Ph.D. in Bioengineering from the University of Pennsylvania and
+        a B.S. in Biomedical Engineering from Case Western Reserve University. My work spans neuroimaging,
+        traumatic brain injury, and cloud-based deep learning platforms for analyzing abdominal CT and other
+        medical images, with contributions to widely used open-source toolkits including ITK and ANTs (Advanced
+        Normalization Tools). I'm an author on more than 100 peer-reviewed publications.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Experience</h2>
+      <div class="entry">
+        <div class="entry-title">Research Scientist, Department of Radiology — University of Pennsylvania</div>
+        <div class="entry-sub">Philadelphia, PA · Present</div>
+        <ul>
+          <li>Developing the AInSights platform for cloud-based AI analysis of medical images in real-world clinical environments, including a deep learning system for organ/tissue identification in abdominal CT reported back to EHR systems</li>
+          <li>Investigating spatiotemporal profiles of atrophy following traumatic brain injury (TBI)</li>
+          <li>Building automated systems to extract and summarize quantitative measures from a large multi-center MR dataset for neurodegenerative disease research</li>
+          <li>Creating web resources for sharing protocols, tools, and SOPs in accordance with FAIR data management principles</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <div class="entry-title">Postdoctoral Researcher, Department of Radiology — University of Pennsylvania</div>
+        <div class="entry-sub">Philadelphia, PA · 2010–2015</div>
+        <ul>
+          <li>Developed methods for multi-modal medical image analysis of pediatric brain data</li>
+          <li>Refactored and redesigned the image registration framework for ITKv4</li>
+          <li>Developed algorithms for large-scale neural network connectivity analysis, contributed to ANTs</li>
+          <li>Active developer of Pipedream, an open-source pipeline for automated neuroimaging analysis</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <div class="entry-title">Research / Co-op Engineer, Whitaker Biomedical Imaging Laboratory — Cleveland Clinic Foundation</div>
+        <div class="entry-sub">Cleveland, OH · 1997–2000</div>
+        <ul>
+          <li>Developed custom research software for radiologists and medical physicists</li>
+          <li>Managed multi-site MRI data collection and standardization for a multi-center drug study</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Selected Publications</h2>
+      <ul class="pub-list">
+        <li>Tran RH, et al. <strong>Hepatic and abdominal adiposity in type 2 diabetes as assessed with machine learning on computed tomography scans.</strong> <span class="pub-venue">Diabetes, Obesity and Metabolism</span>, 2026.</li>
+        <li>Tustison NJ, Chen M, Kronman FN, Duda JT, et al. <strong>The ANTsX ecosystem for mapping the mouse brain.</strong> <span class="pub-venue">Nature Communications</span>, 2025.</li>
+        <li>Kim J, Chae A, Duda J, et al. <strong>Automated characterization of abdominal MRI exams using deep learning.</strong> <span class="pub-venue">Scientific Reports</span>, 2025.</li>
+        <li>Mehdiratta G, Duda JT, et al. <strong>Automated Integration of AI Results into Radiology Reports Using Common Data Elements.</strong> <span class="pub-venue">Journal of Imaging Informatics in Medicine</span>, 2025.</li>
+        <li>Chatterjee N, Duda J, Gee J, et al. <strong>A cloud-based system for automated AI image analysis and reporting.</strong> <span class="pub-venue">Journal of Imaging Informatics in Medicine</span>, 2025.</li>
+        <li>Brennan DJ, Duda J, Ware JB, et al. <strong>Spatiotemporal profile of atrophy in the first year following moderate-severe traumatic brain injury.</strong> <span class="pub-venue">Human Brain Mapping</span>, 2023.</li>
+        <li>Rudie JD, Duda J, et al. <strong>Brain MRI Deep Learning and Bayesian Inference System Augments Radiology Resident Performance.</strong> <span class="pub-venue">Journal of Digital Imaging</span>, 2021.</li>
+        <li>Tustison NJ, Cook PA, Holbrook AJ, et al. <strong>The ANTsX ecosystem for quantitative biological and medical imaging.</strong> <span class="pub-venue">Scientific Reports</span>, 2021.</li>
+        <li>Avants BB, Duda JT, Kilroy E, et al. <strong>The pediatric template of brain perfusion.</strong> <span class="pub-venue">Scientific Data</span>, 2015.</li>
+        <li>Duda JT, Cook PA, Gee JC. <strong>Reproducibility of graph metrics of human brain structural networks.</strong> <span class="pub-venue">Frontiers in Neuroinformatics</span>, 2014.</li>
       </ul>
-    </div>
-  </section>
-
-  <section id="publications">
-    <h2>Selected Publications</h2>
-    <ul class="pub-list">
-      <li>Tran RH, et al. <strong>Hepatic and abdominal adiposity in type 2 diabetes as assessed with machine learning on computed tomography scans.</strong> <span class="pub-venue">Diabetes, Obesity and Metabolism</span>, 2026.</li>
-      <li>Tustison NJ, Chen M, Kronman FN, Duda JT, et al. <strong>The ANTsX ecosystem for mapping the mouse brain.</strong> <span class="pub-venue">Nature Communications</span>, 2025.</li>
-      <li>Kim J, Chae A, Duda J, et al. <strong>Automated characterization of abdominal MRI exams using deep learning.</strong> <span class="pub-venue">Scientific Reports</span>, 2025.</li>
-      <li>Mehdiratta G, Duda JT, et al. <strong>Automated Integration of AI Results into Radiology Reports Using Common Data Elements.</strong> <span class="pub-venue">Journal of Imaging Informatics in Medicine</span>, 2025.</li>
-      <li>Chatterjee N, Duda J, Gee J, et al. <strong>A cloud-based system for automated AI image analysis and reporting.</strong> <span class="pub-venue">Journal of Imaging Informatics in Medicine</span>, 2025.</li>
-      <li>Brennan DJ, Duda J, Ware JB, et al. <strong>Spatiotemporal profile of atrophy in the first year following moderate-severe traumatic brain injury.</strong> <span class="pub-venue">Human Brain Mapping</span>, 2023.</li>
-      <li>Rudie JD, Duda J, et al. <strong>Brain MRI Deep Learning and Bayesian Inference System Augments Radiology Resident Performance.</strong> <span class="pub-venue">Journal of Digital Imaging</span>, 2021.</li>
-      <li>Tustison NJ, Cook PA, Holbrook AJ, et al. <strong>The ANTsX ecosystem for quantitative biological and medical imaging.</strong> <span class="pub-venue">Scientific Reports</span>, 2021.</li>
-      <li>Avants BB, Duda JT, Kilroy E, et al. <strong>The pediatric template of brain perfusion.</strong> <span class="pub-venue">Scientific Data</span>, 2015.</li>
-      <li>Duda JT, Cook PA, Gee JC. <strong>Reproducibility of graph metrics of human brain structural networks.</strong> <span class="pub-venue">Frontiers in Neuroinformatics</span>, 2014.</li>
-    </ul>
-    <p class="note">This is a selected list from 100+ journal papers, conference proceedings, and book chapters. Full list available on request.</p>
-  </section>
-
-  <footer>
-    &copy; 2026 Jeffrey T. Duda
-  </footer>
-
+      <p class="note">Selected from 100+ journal papers, conference proceedings, and book chapters. Full list available on request.</p>
+    </section>
+  </main>
 </div>
 </body>
 </html>
