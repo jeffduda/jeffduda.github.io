@@ -256,6 +256,36 @@
     font-size: 2.4rem;
     margin-bottom: 0.8rem;
   }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.2rem;
+  }
+  .gallery-item {
+    margin: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .gallery-item figcaption {
+    padding: 0.9rem 1rem 1.1rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .gallery-item figcaption a {
+    display: inline-block;
+    margin-top: 0.4rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .gallery-item figcaption a:hover { text-decoration: underline; }
   .page-watermark {
     position: fixed;
     right: 1.75rem;
@@ -339,9 +369,15 @@
   <main class="main">
     <section class="card">
       <h2>Gallery</h2>
-      <div class="placeholder">
-        <div class="icon-big">&#128247;</div>
-        <p>Gallery content coming soon.</p>
+      <div class="gallery-grid">
+        <figure class="gallery-item">
+          <img src="images/wordcloud.jpg" alt="Word cloud generated from the text of the doctoral dissertation">
+          <figcaption>
+            Word cloud generated from my doctoral dissertation, <em>Characterizing Connectivity in Brain Networks Using Magnetic Resonance Imaging</em> (University of Pennsylvania, 2010).
+            <br>
+            <a href="https://repository.upenn.edu/entities/publication/0068666b-cffb-4108-84f2-3e9b5d40b946" target="_blank" rel="noopener">Read the thesis &rarr;</a>
+          </figcaption>
+        </figure>
       </div>
     </section>
   </main>
